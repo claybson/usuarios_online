@@ -11,4 +11,9 @@
 	$sql->bindValue(":ip", $ip);
 	$sql->bindValue(":hora", $hora);
 	$sql->execute();
+	
+	$sql = $pdo->prepare("DELETE FROM acessos WHERE hora < :hora");
+	$sql->bindValue(":hora", date('H:i:s', strtotime("-2 minutes")));
+	$sql->execute();
+	
 ?>
