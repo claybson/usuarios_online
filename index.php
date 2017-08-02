@@ -16,4 +16,11 @@
 	$sql->bindValue(":hora", date('H:i:s', strtotime("-2 minutes")));
 	$sql->execute();
 	
+	$sql = "SELECT * FROM acessos WHERE hora > :hora GROUP BY ip";
+	$sql = $pdo->prepare($sql);
+	$sql->bindValue(":hora", date('H:i:s', strtotime("-2 minutes")));
+	$sql->execute();
+	$contagem = $sql->rowCount();
+
+	echo "ONLINE: ".$contagem;
 ?>
